@@ -10,7 +10,6 @@ import { FaImage, FaBox, FaDollarSign, FaTags, FaFileAlt } from 'react-icons/fa'
 const categoryList = [
     { name: 'Face Care' },
     { name: 'Body Care' },
-    { name: 'Skincare' },
     { name: 'Hair Care' },
     { name: 'Essential Oils' },
     { name: 'Herbal' },
@@ -30,6 +29,13 @@ const AddProductPage = () => {
         productImageUrl: "",
         category: "",
         description: "",
+        shippingCost: "0",
+        offer: {
+            isActive: false,
+            discountPercentage: 0,
+            discountedPrice: 0,
+            validUntil: ""
+        },
         quantity: 1,
         time: Timestamp.now(),
         date: new Date().toLocaleString("en-US", {
@@ -40,14 +46,37 @@ const AddProductPage = () => {
     });
 
     const addProductFunction = async () => {
-        if (!product.title || !product.price || !product.productImageUrl || !product.category || !product.description) {
-            return toast.error("All fields are required");
+        if (product.title === "" || product.price === "" || product.productImageUrl === "" || product.category === "" || product.description === "") {
+            toast.error("All fields are required");
+            return;
         }
 
         setLoading(true);
         try {
+            const productData = {
+                ...product,
+                price: parseFloat(product.price),
+                shippingCost: parseFloat(product.shippingCost || 0),
+                offer: {
+                    ...product.offer,
+                    discountPercentage: parseFloat(product.offer.discountPercentage),
+                    discountedPrice: product.offer.isActive ? 
+                        parseFloat(product.price) * (1 - parseFloat(product.offer.discountPercentage) / 100) : 
+                        0
+                },
+                time: Timestamp.now(),
+                date: new Date().toLocaleString(
+                    "en-US",
+                    {
+                        month: "short",
+                        day: "2-digit",
+                        year: "numeric",
+                    }
+                )
+            };
+
             const productRef = collection(fireDB, 'products');
-            await addDoc(productRef, product);
+            await addDoc(productRef, productData);
             toast.success("Product added successfully");
             navigate('/admin-dashboard');
         } catch (error) {
@@ -84,19 +113,59 @@ const AddProductPage = () => {
                                 />
                             </div>
 
-                            {/* Price */}
-                            <div>
-                                <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                                    <FaDollarSign className="w-4 h-4 mr-2 text-gray-400" />
-                                    Price
-                                </label>
-                                <input
-                                    type="number"
-                                    value={product.price}
-                                    onChange={(e) => setProduct({ ...product, price: e.target.value })}
-                                    placeholder="Enter price"
-                                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
-                                />
+                            {/* Price and Category */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Price */}
+                                <div>
+                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                        <FaDollarSign className="mr-2" />
+                                        Price
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        value={product.price}
+                                        onChange={(e) => setProduct({ ...product, price: e.target.value })}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                                        placeholder="Enter price"
+                                    />
+                                </div>
+
+                                {/* Shipping Cost */}
+                                <div>
+                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                        <FaDollarSign className="mr-2" />
+                                        Shipping Cost
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="shippingCost"
+                                        value={product.shippingCost}
+                                        onChange={(e) => setProduct({ ...product, shippingCost: e.target.value })}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                                        placeholder="Enter shipping cost"
+                                    />
+                                </div>
+
+                                {/* Category */}
+                                <div>
+                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                        <FaTags className="w-4 h-4 mr-2 text-gray-400" />
+                                        Category
+                                    </label>
+                                    <select
+                                        value={product.category}
+                                        onChange={(e) => setProduct({ ...product, category: e.target.value })}
+                                        className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
+                                    >
+                                        <option value="">Select a category</option>
+                                        {categoryList.map(({ name }, index) => (
+                                            <option key={index} value={name} className="capitalize">
+                                                {name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </div>
 
                             {/* Image URL */}
@@ -127,26 +196,6 @@ const AddProductPage = () => {
                                 )}
                             </div>
 
-                            {/* Category */}
-                            <div>
-                                <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                                    <FaTags className="w-4 h-4 mr-2 text-gray-400" />
-                                    Category
-                                </label>
-                                <select
-                                    value={product.category}
-                                    onChange={(e) => setProduct({ ...product, category: e.target.value })}
-                                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
-                                >
-                                    <option value="">Select a category</option>
-                                    {categoryList.map(({ name }, index) => (
-                                        <option key={index} value={name} className="capitalize">
-                                            {name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
                             {/* Description */}
                             <div>
                                 <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
@@ -160,6 +209,36 @@ const AddProductPage = () => {
                                     rows="5"
                                     className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors resize-none"
                                 />
+                            </div>
+
+                            {/* Offer */}
+                            <div>
+                                <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                    Offer
+                                </label>
+                                <div className="flex items-center space-x-2">
+                                    <input
+                                        type="checkbox"
+                                        checked={product.offer.isActive}
+                                        onChange={(e) => setProduct({ ...product, offer: { ...product.offer, isActive: e.target.checked } })}
+                                        className="w-4 h-4"
+                                    />
+                                    <span>Active</span>
+                                </div>
+                                {product.offer.isActive && (
+                                    <div className="mt-2">
+                                        <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                            Discount Percentage
+                                        </label>
+                                        <input
+                                            type="number"
+                                            value={product.offer.discountPercentage}
+                                            onChange={(e) => setProduct({ ...product, offer: { ...product.offer, discountPercentage: e.target.value } })}
+                                            placeholder="Enter discount percentage"
+                                            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             {/* Submit Button */}

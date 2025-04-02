@@ -3,7 +3,7 @@ const Loader = () => {
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white bg-opacity-60 z-50">
             <svg
                 aria-hidden="true"
-                className="w-12 h-12 text-pink-200 animate-spin fill-pink-500"
+                className="w-12 h-12 text-green-200 animate-spin fill-pink-500"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

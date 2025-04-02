@@ -4,6 +4,7 @@ import myContext from "../../context/myContext";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, deleteFromCart } from "../../redux/cartSlice";
 import toast from "react-hot-toast";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const HomePageProductCard = () => {
     const navigate = useNavigate();
@@ -27,6 +28,52 @@ const HomePageProductCard = () => {
         toast.success("Removed from cart");
     }
 
+    const renderPrice = (product) => {
+        if (product.offer && product.offer.isActive) {
+            const currentDate = new Date();
+            const validUntil = product.offer.validUntil ? new Date(product.offer.validUntil) : null;
+            
+            if (!validUntil || currentDate <= validUntil) {
+                return (
+                    <div className="flex items-center space-x-2">
+                        <p className="text-2xl font-bold text-gray-800">
+                            ৳{product.offer.discountedPrice.toFixed(2)}
+                        </p>
+                        <p className="text-sm text-gray-500 line-through">
+                            ৳{product.price}
+                        </p>
+                        <span className="text-sm font-semibold text-red-500">
+                            -{product.offer.discountPercentage}%
+                        </span>
+                    </div>
+                );
+            }
+        }
+        return <p className="text-2xl font-bold text-gray-800">৳{product.price}</p>;
+    };
+
+    const renderStars = (rating) => {
+        const stars = [];
+        const roundedRating = Math.round(rating * 2) / 2;
+        
+        for (let i = 1; i <= 5; i++) {
+            if (i <= roundedRating) {
+                stars.push(
+                    <FaStar key={i} className="text-yellow-400 w-4 h-4" />
+                );
+            } else if (i - 0.5 === roundedRating) {
+                stars.push(
+                    <FaStarHalfAlt key={i} className="text-yellow-400 w-4 h-4" />
+                );
+            } else {
+                stars.push(
+                    <FaRegStar key={i} className="text-yellow-400 w-4 h-4" />
+                );
+            }
+        }
+        return stars;
+    };
+
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
     }, [cartItems])
@@ -44,7 +91,7 @@ const HomePageProductCard = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {getAllProduct && getAllProduct.length > 0 ? (
                         getAllProduct.slice(0, 8).map((item, index) => {
-                            const { id, title, price, productImageUrl, description = '', category = '' } = item;
+                            const { id, title, price, productImageUrl, description = '', category = '', offer = {}, reviews = [] } = item;
                             return (
                                 <div key={index} className="group">
                                     <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-green-100/50">
@@ -60,6 +107,11 @@ const HomePageProductCard = () => {
                                                 <span className="absolute top-4 left-4 bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full capitalize">
                                                     {category}
                                                 </span>
+                                            )}
+                                            {offer?.isActive && (
+                                                <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full text-sm">
+                                                    Offer!
+                                                </div>
                                             )}
                                         </div>
 
@@ -80,9 +132,15 @@ const HomePageProductCard = () => {
                                                         {description}
                                                     </p>
                                                 )}
-                                                <div className="text-2xl font-bold text-gray-800 mb-4">
-                                                    ৳{price}
+                                                <div className="flex items-center mb-2">
+                                                    <div className="flex mr-2">
+                                                        {renderStars(reviews.reduce((acc, review) => acc + review.rating, 0) / (reviews.length || 1))}
+                                                    </div>
+                                                    <span className="text-sm text-gray-500">
+                                                        ({reviews.length || 0})
+                                                    </span>
                                                 </div>
+                                                {renderPrice(item)}
                                             </div>
 
                                             {/* Action Button */}

@@ -27,6 +27,30 @@ const ProductDetail = () => {
         }
     }
 
+    const renderPrice = (product) => {
+        if (product.offer && product.offer.isActive) {
+            const currentDate = new Date();
+            const validUntil = product.offer.validUntil ? new Date(product.offer.validUntil) : null;
+            
+            if (!validUntil || currentDate <= validUntil) {
+                return (
+                    <div className="flex items-center space-x-2">
+                        <p className="text-xl font-bold text-green-600">
+                            ৳{product.offer.discountedPrice.toFixed(2)}
+                        </p>
+                        <p className="text-sm text-gray-500 line-through">
+                            ৳{product.price}
+                        </p>
+                        <span className="text-sm font-semibold text-red-500">
+                            -{product.offer.discountPercentage}%
+                        </span>
+                    </div>
+                );
+            }
+        }
+        return <p className="text-xl font-bold text-green-600">৳{product.price}</p>;
+    };
+
     return (
         <div className="p-4">
             <div className="flex justify-between items-center mb-6">
@@ -61,7 +85,7 @@ const ProductDetail = () => {
                             </thead>
                             <tbody>
                                 {getAllProduct.map((item, index) => {
-                                    const { id, title, price, category, date, productImageUrl } = item;
+                                    const { id, title, price, category, date, productImageUrl, offer } = item;
                                     return (
                                         <tr key={index} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                                             <td className="py-4 px-6 text-sm text-gray-600">
@@ -84,7 +108,7 @@ const ProductDetail = () => {
                                                 <p className="truncate" title={title}>{title}</p>
                                             </td>
                                             <td className="py-4 px-6 text-sm font-medium text-gray-800">
-                                                ৳{price}
+                                                {renderPrice(item)}
                                             </td>
                                             <td className="py-4 px-6">
                                                 <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">

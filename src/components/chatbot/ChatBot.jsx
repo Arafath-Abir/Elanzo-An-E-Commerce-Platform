@@ -1,15 +1,39 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaRobot, FaPaperPlane, FaTimes } from 'react-icons/fa';
 
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
-        { text: "Hello! I'm OrganicaBot. How can I help you today?", isBot: true }
+        { text: "Hello! I'm OrganicaBot. I can help you with information about OrganicaHub, our products, services, and features. What would you like to know?", isBot: true }
     ]);
     const [inputMessage, setInputMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
     const API_KEY = 'AIzaSyA5eMFxn0IVUxd7l6WV76e7AkYf3mmTRBo';
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+
+    // Project-specific knowledge base
+    const projectInfo = {
+        about: "OrganicaHub is an e-commerce platform specializing in natural and organic beauty products. We focus on sustainability, pure ingredients, and eco-friendly practices.",
+        features: [
+            "Product browsing and search",
+            "User authentication and profiles",
+            "Shopping cart functionality",
+            "Secure payment processing",
+            "Admin dashboard for product management",
+            "Order tracking system",
+            "Customer testimonials",
+            "Category-based product filtering"
+        ],
+        technologies: [
+            "React.js for frontend",
+            "Tailwind CSS for styling",
+            "Redux for state management",
+            "Firebase for backend services",
+            "Payment gateway integration",
+            "Responsive design for all devices"
+        ]
+    };
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -18,6 +42,18 @@ const ChatBot = () => {
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
+
+    const generatePrompt = (userMessage) => {
+        return `You are OrganicaBot, a helpful assistant for the OrganicaHub e-commerce platform. Here's some context about the project:
+
+Project: ${projectInfo.about}
+Features: ${projectInfo.features.join(", ")}
+Technologies: ${projectInfo.technologies.join(", ")}
+
+User question: ${userMessage}
+
+Please provide a helpful, concise response about OrganicaHub. If the question is not related to OrganicaHub, politely mention that you're focused on helping with OrganicaHub-related questions. Keep the response friendly and professional.`;
+    };
 
     const handleSendMessage = async (e) => {
         e.preventDefault();
@@ -30,25 +66,24 @@ const ChatBot = () => {
         setIsTyping(true);
 
         try {
-            const response = await fetch('https://dialogflow.googleapis.com/v2/projects/organicahub/agent/sessions/123456:detectIntent', {
+            const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${API_KEY}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    queryInput: {
-                        text: {
-                            text: inputMessage,
-                            languageCode: 'en-US',
-                        },
-                    },
-                }),
+                    contents: [{
+                        parts: [{ text: generatePrompt(inputMessage) }]
+                    }]
+                })
             });
 
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`);
+            }
+
             const data = await response.json();
-            const botResponse = data.queryResult?.fulfillmentText || "I'm sorry, I couldn't process that request.";
-            
+            const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't process that request.";
             setMessages(prev => [...prev, { text: botResponse, isBot: true }]);
         } catch (error) {
             console.error('Error:', error);
@@ -66,7 +101,7 @@ const ChatBot = () => {
             {/* Chat Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="bg-green-600 hover:bg-green-700 text-white rounded-full p-4 shadow-lg
+                className="bg-pink-600 hover:bg-pink-700 text-white rounded-full p-4 shadow-lg
                          transition-transform duration-200 hover:scale-110"
             >
                 {isOpen ? (
@@ -81,11 +116,11 @@ const ChatBot = () => {
                 <div className="absolute bottom-20 right-0 w-96 h-[32rem] bg-white rounded-2xl shadow-2xl 
                               flex flex-col border border-gray-200 overflow-hidden">
                     {/* Header */}
-                    <div className="bg-green-600 text-white p-4 flex items-center space-x-3">
+                    <div className="bg-pink-600 text-white p-4 flex items-center space-x-3">
                         <FaRobot className="w-6 h-6" />
                         <div>
                             <h3 className="font-semibold">OrganicaBot</h3>
-                            <p className="text-sm text-green-100">Online</p>
+                            <p className="text-sm text-pink-100">Online</p>
                         </div>
                     </div>
 
@@ -100,10 +135,10 @@ const ChatBot = () => {
                                     className={`rounded-2xl px-4 py-2 max-w-[80%] ${
                                         message.isBot
                                             ? 'bg-white border border-gray-200'
-                                            : 'bg-green-600 text-white'
+                                            : 'bg-pink-600 text-white'
                                     }`}
                                 >
-                                    <p className="text-sm">{message.text}</p>
+                                    <p className="text-sm whitespace-pre-wrap">{message.text}</p>
                                 </div>
                             </div>
                         ))}
@@ -128,14 +163,14 @@ const ChatBot = () => {
                                 type="text"
                                 value={inputMessage}
                                 onChange={(e) => setInputMessage(e.target.value)}
-                                placeholder="Type your message..."
+                                placeholder="Ask about OrganicaHub..."
                                 className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none 
-                                         focus:ring-2 focus:ring-green-500/20 focus:border-green-500"
+                                         focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500"
                             />
                             <button
                                 type="submit"
                                 disabled={!inputMessage.trim()}
-                                className="bg-green-600 text-white rounded-lg px-4 py-2 hover:bg-green-700 
+                                className="bg-pink-600 text-white rounded-lg px-4 py-2 hover:bg-pink-700 
                                          transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <FaPaperPlane className="w-5 h-5" />

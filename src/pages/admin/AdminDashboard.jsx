@@ -21,7 +21,7 @@ const AdminDashboard = () => {
                 {/* Top */}
                 <div className="mb-8">
                     <div className="bg-gradient-to-r from-green-400/10 to-green-500/10 p-6 rounded-xl border border-green-500/10 shadow-sm">
-                        <h1 className="text-center text-2xl font-bold text-green-800">Admin Dashboard</h1>
+                        <h1 className="text-center text-2xl font-bold text-green-800">Admin/Seller Dashboard</h1>
                     </div>
                 </div>
 
@@ -29,7 +29,7 @@ const AdminDashboard = () => {
                 <div className="mb-8">
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="relative h-32 bg-gradient-to-r from-green-400 to-green-500">
-                            {/* <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+                            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
                                 <div className="w-24 h-24 rounded-full border-4 border-white bg-white shadow-md overflow-hidden">
                                     <img 
                                         src="https://cdn-icons-png.flaticon.com/128/2202/2202112.png" 
@@ -37,7 +37,7 @@ const AdminDashboard = () => {
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
-                            </div> */}
+                            </div>
                         </div>
                         <div className="pt-16 pb-6 px-4">
                             <div className="text-center space-y-1">

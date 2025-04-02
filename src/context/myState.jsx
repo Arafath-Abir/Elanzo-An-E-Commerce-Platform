@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import MyContext from './myContext';
-import { collection, deleteDoc, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
 import { fireDB } from '../firebase/FirebaseConfig';
 import toast from 'react-hot-toast';
 
@@ -115,6 +115,25 @@ function MyState({ children }) {
         }
     }
 
+    // Update Order Status Function
+    const updateOrderStatus = async (orderId, newStatus) => {
+        setLoading(true)
+        try {
+            const orderRef = doc(fireDB, 'order', orderId);
+            await updateDoc(orderRef, {
+                status: newStatus
+            });
+            
+            toast.success('Order status updated successfully');
+            getAllOrderFunction(); // Refresh orders after update
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+            toast.error('Failed to update order status');
+            setLoading(false)
+        }
+    }
+
     useEffect(() => {
         getAllProductFunction();
         getAllOrderFunction();
@@ -128,7 +147,8 @@ function MyState({ children }) {
             getAllProductFunction,
             getAllOrder,
             deleteProduct,
-            getAllUser
+            getAllUser,
+            updateOrderStatus
         }}>
             {children}
         </MyContext.Provider>

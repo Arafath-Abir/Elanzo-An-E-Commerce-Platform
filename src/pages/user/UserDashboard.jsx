@@ -57,69 +57,74 @@ const UserDashboard = () => {
                             <p className="text-gray-500">Your order history will appear here</p>
                         </div>
                     ) : (
-                        <div className="space-y-6">
-                            {userOrders.map((order) => (
-                                <div key={order.id} className="card card-hover">
-                                    {order.cartItems?.map((item, index) => {
-                                        const { id, date, quantity, price, title, productImageUrl, category } = item;
-                                        const { status } = order;
-                                        return (
-                                            <div key={index} className="flex flex-col md:flex-row">
-                                                {/* Order Info */}
-                                                <div className="w-full md:w-1/3 bg-gradient-to-br from-green-50 to-green-100 p-6 space-y-4">
-                                                    <div>
-                                                        <div className="text-sm text-gray-600">Order ID</div>
-                                                        <div className="font-semibold text-gray-800">#{id}</div>
+                        <div className="space-y-6 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+                            <div className="min-w-[768px]">
+                                {userOrders.map((order) => (
+                                    <div key={order.id} className="card card-hover">
+                                        {order.cartItems?.map((item, index) => {
+                                            const { id, date, quantity, price, title, productImageUrl, category } = item;
+                                            const { status } = order;
+                                            return (
+                                                <div key={index} className="flex flex-col md:flex-row">
+                                                    {/* Order Info */}
+                                                    <div className="w-full md:w-1/3 bg-gradient-to-br from-green-50 to-green-100 p-6 space-y-4">
+                                                        <div>
+                                                            <div className="text-sm text-gray-600">Order ID</div>
+                                                            <div className="font-semibold text-gray-800">#{id}</div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="text-sm text-gray-600">Date</div>
+                                                            <div className="font-semibold text-gray-800">{date}</div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="text-sm text-gray-600">Total Amount</div>
+                                                            <div className="font-semibold text-green-600">৳{price * quantity}</div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="text-sm text-gray-600">Status</div>
+                                                            <span className={`badge ${
+                                                                status === 'delivered' ? 'bg-green-100 text-green-800' : 
+                                                                status === 'processing' ? 'bg-yellow-100 text-yellow-800' :
+                                                                status === 'confirmed' ? 'bg-blue-100 text-blue-800' :
+                                                                'bg-gray-100 text-gray-800'
+                                                            } px-3 py-1 rounded-full text-xs font-medium capitalize`}>
+                                                                {status}
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <div className="text-sm text-gray-600">Date</div>
-                                                        <div className="font-semibold text-gray-800">{date}</div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="text-sm text-gray-600">Total Amount</div>
-                                                        <div className="font-semibold text-green-600">৳{price * quantity}</div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="text-sm text-gray-600">Status</div>
-                                                        <span className={`badge ${
-                                                            status === 'delivered' ? 'badge-success' : 'badge-warning'
-                                                        } capitalize`}>
-                                                            {status}
-                                                        </span>
-                                                    </div>
-                                                </div>
 
-                                                {/* Product Info */}
-                                                <div className="flex-1 p-6">
-                                                    <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6">
-                                                        <div className="w-full md:w-48 h-48 rounded-lg overflow-hidden bg-gray-100">
-                                                            <img
-                                                                src={productImageUrl}
-                                                                alt={title}
-                                                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                                            />
-                                                        </div>
-                                                        <div className="flex-1 space-y-4">
-                                                            <div>
-                                                                <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
-                                                                <p className="text-gray-600">{category}</p>
+                                                    {/* Product Info */}
+                                                    <div className="flex-1 p-6">
+                                                        <div className="flex flex-col md:flex-row items-start space-y-4 md:space-y-0 md:space-x-6">
+                                                            <div className="w-full md:w-48 h-48 rounded-lg overflow-hidden bg-gray-100">
+                                                                <img
+                                                                    src={productImageUrl}
+                                                                    alt={title}
+                                                                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                                                />
                                                             </div>
-                                                            <div className="flex items-center justify-between">
-                                                                <div className="text-sm text-gray-600">
-                                                                    Quantity: <span className="font-semibold">{quantity}</span>
+                                                            <div className="flex-1 space-y-4">
+                                                                <div>
+                                                                    <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
+                                                                    <p className="text-gray-600">{category}</p>
                                                                 </div>
-                                                                <div className="text-lg font-bold text-green-600">
-                                                                    ৳{price}
+                                                                <div className="flex items-center justify-between">
+                                                                    <div className="text-sm text-gray-600">
+                                                                        Quantity: <span className="font-semibold">{quantity}</span>
+                                                                    </div>
+                                                                    <div className="text-lg font-bold text-green-600">
+                                                                        ৳{price}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            ))}
+                                            );
+                                        })}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     )}
                 </div>

@@ -5,6 +5,8 @@ export default withMT({
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 });
  
