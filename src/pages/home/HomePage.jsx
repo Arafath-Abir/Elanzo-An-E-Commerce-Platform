@@ -48,7 +48,7 @@ const HomePage = () => {
 
                         {/* Popup Image */}
                         <img
-                            src="https://i.postimg.cc/ryNmS2KK/shajgoj-popup.webp"
+                            src="https://i.postimg.cc/Qt7Gq6vd/Black-White-Minimalist-New-Product-Natural-Skincare-Promotion-Instagram-Post.png"
                             alt="Special Offer"
                             className="w-full h-auto rounded-lg shadow-2xl"
                             style={{ maxHeight: '90vh', objectFit: 'contain' }}
