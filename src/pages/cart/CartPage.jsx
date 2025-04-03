@@ -113,7 +113,11 @@ const CartPage = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:8080/api/ssl/init', {
+            // Use environment variable for server URL or fallback to localhost for development
+            const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:8080';
+            console.log('Using server URL:', SERVER_URL);
+            
+            const response = await fetch(`${SERVER_URL}/api/ssl/init`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

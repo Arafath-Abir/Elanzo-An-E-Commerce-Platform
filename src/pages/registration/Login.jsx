@@ -65,11 +65,28 @@ const Login = () => {
                 navigate('/user-dashboard', { replace: true });
             }
         } catch (error) {
-            console.error("Error:", error);
-            if (error.code === 'auth/popup-closed-by-user') {
-                toast.error("Login cancelled");
-            } else {
-                toast.error("Failed to login with Google");
+            console.error("Google Login Error:", error);
+            
+            // Handle specific Firebase auth errors with clear messages
+            switch(error.code) {
+                case 'auth/popup-closed-by-user':
+                    toast.error("Login cancelled");
+                    break;
+                case 'auth/popup-blocked':
+                    toast.error("Login popup was blocked. Please allow popups for this site.");
+                    break;
+                case 'auth/cancelled-popup-request':
+                    toast.error("Another popup is already open.");
+                    break;
+                case 'auth/network-request-failed':
+                    toast.error("Network error. Please check your internet connection.");
+                    break;
+                case 'auth/unauthorized-domain':
+                    toast.error("This domain is not authorized for Google login. Contact support.");
+                    console.error("Your domain is not authorized in Firebase Console. Add '" + window.location.hostname + "' to authorized domains.");
+                    break;
+                default:
+                    toast.error("Failed to login with Google: " + error.message);
             }
         } finally {
             setLoading(false);
