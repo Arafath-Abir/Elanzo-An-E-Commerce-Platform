@@ -84,7 +84,7 @@ const HomePageProductCard = () => {
                 {/* Heading */}
                 <div className="text-center mb-12">
                     <h2 className="text-3xl font-bold text-gray-800 mb-2">Bestselling Products</h2>
-                    <p className="text-gray-600">Discover our most loved natural skincare solutions</p>
+                    <p className="text-gray-600">Discover the latest trends in fashion with our curated collections</p>
                 </div>
 
                 {/* Products Grid */}
@@ -119,7 +119,7 @@ const HomePageProductCard = () => {
                                         <div className="p-6">
                                             <div className="mb-4">
                                                 <h2 className="text-sm text-green-600 font-medium mb-1">
-                                                    OrganicaHub
+                                                    Elanzo
                                                 </h2>
                                                 <h3 
                                                     onClick={() => navigate(`/productinfo/${id}`)}

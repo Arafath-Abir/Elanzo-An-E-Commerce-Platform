@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', (req, res) => {
-    res.json({ message: 'OrganicaHub Payment Server is running' });
+    res.json({ message: 'Elanzo Payment Server is running' });
 });
 
 app.use("/api/ssl", require("./routes/ssl"));

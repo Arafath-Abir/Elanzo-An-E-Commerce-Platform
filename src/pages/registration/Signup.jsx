@@ -148,7 +148,7 @@ const Signup = () => {
                             Create an Account
                         </h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
-                            Join OrganicaHub and start shopping organic
+                            Join Elanzo and start shopping
                         </p>
                     </div>
 

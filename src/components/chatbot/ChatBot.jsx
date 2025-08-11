@@ -4,7 +4,7 @@ import { FaRobot, FaPaperPlane, FaTimes } from 'react-icons/fa';
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
-        { text: "Hello! I'm OrganicaBot. I can help you with information about OrganicaHub, our products, services, and features. What would you like to know?", isBot: true }
+        { text: "Hello! I'm ElanzoBot. I can help you with information about Elanzo, our products, services, and features. What would you like to know?", isBot: true }
     ]);
     const [inputMessage, setInputMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
@@ -14,7 +14,7 @@ const ChatBot = () => {
 
     // Project-specific knowledge base
     const projectInfo = {
-        about: "OrganicaHub is an e-commerce platform specializing in natural and organic beauty products. We focus on sustainability, pure ingredients, and eco-friendly practices.",
+        about: "Elanzo is an e-commerce platform specializing in natural and organic beauty products. We focus on sustainability, pure ingredients, and eco-friendly practices.",
         features: [
             "Product browsing and search",
             "User authentication and profiles",
@@ -44,7 +44,7 @@ const ChatBot = () => {
     }, [messages]);
 
     const generatePrompt = (userMessage) => {
-        return `You are OrganicaBot, a helpful assistant for the OrganicaHub e-commerce platform. Here's some context about the project:
+        return `You are ElanzoBot, a helpful assistant for the Elanzo e-commerce platform. Here's some context about the project:
 
 Project: ${projectInfo.about}
 Features: ${projectInfo.features.join(", ")}
@@ -52,7 +52,7 @@ Technologies: ${projectInfo.technologies.join(", ")}
 
 User question: ${userMessage}
 
-Please provide a helpful, concise response about OrganicaHub. If the question is not related to OrganicaHub, politely mention that you're focused on helping with OrganicaHub-related questions. Keep the response friendly and professional.`;
+Please provide a helpful, concise response about Elanzo. If the question is not related to Elanzo, politely mention that you're focused on helping with Elanzo-related questions. Keep the response friendly and professional.`;
     };
 
     const handleSendMessage = async (e) => {
@@ -119,7 +119,7 @@ Please provide a helpful, concise response about OrganicaHub. If the question is
                     <div className="bg-pink-600 text-white p-4 flex items-center space-x-3">
                         <FaRobot className="w-6 h-6" />
                         <div>
-                            <h3 className="font-semibold">OrganicaBot</h3>
+                            <h3 className="font-semibold">ElanzoBot</h3>
                             <p className="text-sm text-pink-100">Online</p>
                         </div>
                     </div>
@@ -163,7 +163,7 @@ Please provide a helpful, concise response about OrganicaHub. If the question is
                                 type="text"
                                 value={inputMessage}
                                 onChange={(e) => setInputMessage(e.target.value)}
-                                placeholder="Ask about OrganicaHub..."
+                                placeholder="Ask about Elanzo..."
                                 className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none 
                                          focus:ring-2 focus:ring-pink-500/20 focus:border-pink-500"
                             />

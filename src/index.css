@@ -2,3 +2,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Brand quick overrides: map green utilities to Elanzo brand (#f85606) */
+/* Text colors */
+.text-green-600 { color: #f85606 !important; }
+.text-green-700 { color: #e14f05 !important; }
+.text-green-800 { color: #b83f04 !important; }
+
+/* Backgrounds */
+.bg-green-50  { background-color: #fff2eb !important; }
+.bg-green-100 { background-color: #ffe4d6 !important; }
+.bg-green-600 { background-color: #f85606 !important; }
+
+/* Borders and rings */
+.border-green-100 { border-color: #ffe4d6 !important; }
+.ring-green-100 { --tw-ring-color: #ffe4d6 !important; }
+
+/* Badges/pills often use text on light bg; ensure contrast */
+.text-green-800.bg-green-100 { color: #b83f04 !important; }
+
+/* Gradients using green-50 as from color */
+.from-green-50 {
+  --tw-gradient-from: #fff2eb var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(255 242 235 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+/* Hover helpers (best-effort) */
+.hover\:bg-green-100:hover { background-color: #ffe4d6 !important; }
+.hover\:text-green-600:hover { color: #f85606 !important; }

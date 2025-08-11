@@ -37,7 +37,7 @@ const CategoryPage = () => {
                     {/* Heading */}
                     <div className="text-center mb-8">
                         <h1 className="text-3xl font-bold text-gray-800 capitalize mb-2">{categoryname}</h1>
-                        <p className="text-gray-600">Discover our natural and organic {categoryname.toLowerCase()} collection</p>
+                        <p className="text-gray-600">Discover the latest trends in fashion with our curated collections {categoryname.toLowerCase()} collection</p>
                     </div>
 
                     {/* Products Grid */}
@@ -70,7 +70,7 @@ const CategoryPage = () => {
                                                 <div className="p-6">
                                                     <div className="mb-4">
                                                         <h2 className="text-sm text-green-600 font-medium mb-1">
-                                                            OrganicaHub
+                                                            Elanzo
                                                         </h2>
                                                         <h3 
                                                             onClick={() => navigate(`/productinfo/${id}`)}

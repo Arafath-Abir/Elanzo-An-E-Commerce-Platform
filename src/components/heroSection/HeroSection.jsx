@@ -49,7 +49,7 @@ const HeroSection = () => {
                     >
                         <div className="relative h-full">
                             <img
-                                src="https://i.postimg.cc/SKhL3RHR/photo.png"
+                                src="https://i.postimg.cc/kXLn3b0F/Accessories.jpg"
                                 alt=""
                                 className="h-full w-full object-cover"
                             />
@@ -64,7 +64,7 @@ const HeroSection = () => {
                         </div>
                         <div className="relative h-full">
                             <img
-                                src="https://i.postimg.cc/vmcd48z9/Untitled-design.png"
+                                src="https://i.postimg.cc/2y85yNGQ/offer.png"
                                 alt=""
                                 className="h-full w-full object-cover"
                             />
@@ -79,7 +79,7 @@ const HeroSection = () => {
                         </div>
                         <div className="relative h-full">
                             <img
-                                src="https://i.postimg.cc/pd4MzNGS/Untitled-800-x-348-px.png"
+                                src="https://i.postimg.cc/FFWrpqG6/womenfashion.jpg"
                                 alt=""
                                 className="h-full w-full object-cover"
                             />
@@ -92,21 +92,9 @@ const HeroSection = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="relative h-full">
-                            <img
-                                src="https://i.postimg.cc/3xM20W81/photo1.png"
-                                alt=""
-                                className="h-full w-full object-cover"
-                            />
-                            <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/25">
-                                <div className="w-3/4 text-center md:w-2/4">
-                                    <h1 className="mb-4 text-2xl md:text-4xl lg:text-5xl text-white font-bold"></h1>
-                                    <p className="mb-6 text-sm md:text-lg text-green-100 opacity-80">
-                                        
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        
+                       
                     </Carousel>
                 </div>
             </div>

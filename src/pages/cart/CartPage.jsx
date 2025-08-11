@@ -364,8 +364,8 @@ const CartPage = () => {
                             <div className="mt-6 bg-green-50 p-4 rounded-lg">
                                 <h4 className="text-green-800 font-medium mb-2">Contact Support</h4>
                                 <p className="text-green-700">
-                                    Email: support@organicahub.com<br />
-                                    Phone: +880 123-456-7890
+                                    Email: support@elanzo.com<br />
+                                    Phone: +880 623-456-7890
                                 </p>
                             </div>
 

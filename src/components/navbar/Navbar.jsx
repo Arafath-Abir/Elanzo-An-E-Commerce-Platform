@@ -133,13 +133,13 @@ const Navbar = () => {
     );
 
     return (
-        <nav className="bg-gradient-to-r from-green-600 to-green-800 sticky top-0 z-50 shadow-lg">
+        <nav className="bg-[#f85606] sticky top-0 z-50 shadow-lg">
             <div className="container mx-auto">
                 <div className="flex flex-col lg:flex-row lg:justify-between items-center py-4 px-6 space-y-4 lg:space-y-0">
                     {/* Logo and hamburger section */}
                     <div className="flex justify-between items-center w-full lg:w-auto">
                         <Link to={'/'} className="transform hover:scale-105 transition-transform">
-                            <h2 className="font-bold text-white text-2xl">Organica<span className="text-green-200">Hub</span></h2>
+                            <h2 className="font-bold text-white text-2xl">Elanzo<span className="text-white/90">Hub</span></h2>
                         </Link>
                         
                         <HamburgerIcon 

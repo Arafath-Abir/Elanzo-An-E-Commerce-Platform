@@ -8,14 +8,22 @@ import Loader from "../../components/loader/Loader";
 import { FaImage, FaBox, FaDollarSign, FaTags, FaFileAlt } from 'react-icons/fa';
 
 const categoryList = [
-    { name: 'Face Care' },
-    { name: 'Body Care' },
-    { name: 'Hair Care' },
-    { name: 'Essential Oils' },
-    { name: 'Herbal' },
-    { name: 'Aromatherapy' },
-    { name: 'Wellness' },
-    { name: 'Gift Sets' }
+    { name: "Men's Fashion" },
+    { name: "Women's Fashion" },
+    { name: "Kids & Baby" },
+    { name: "Modest Wear" },
+    { name: "Ethnic & Traditional" },
+    { name: "Dresses" },
+    { name: "Tops & Shirts" },
+    { name: "Jeans & Trousers" },
+    { name: "Outerwear & Jackets" },
+    { name: "Activewear" },
+    { name: "Loungewear & Sleepwear" },
+    { name: "Footwear" },
+    { name: "Bags & Backpacks" },
+    { name: "Accessories" },
+    { name: "Jewelry & Watches" },
+    { name: "Seasonal & Occasion" }
 ];
 
 const UpdateProductPage = () => {
