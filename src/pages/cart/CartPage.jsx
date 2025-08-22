@@ -154,11 +154,11 @@ const CartPage = () => {
 
     return (
         <Layout>
-            <div className="bg-gray-50 min-h-screen">
+            <div className="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
                 <div className="container mx-auto px-4 max-w-7xl py-8 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between mb-8">
-                        <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
-                        <div className="text-sm text-gray-600">
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors duration-300">Shopping Cart</h1>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
                             {cartItemTotal || 0} {(cartItemTotal || 0) === 1 ? 'item' : 'items'}
                         </div>
                     </div>
@@ -183,7 +183,7 @@ const CartPage = () => {
                                         const itemShipping = safeShipping * safeQuantity;
                                         
                                         return (
-                                            <div key={index} className="bg-white rounded-lg shadow-sm p-6">
+                                            <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 transition-colors duration-300">
                                                 <div className="flex items-start space-x-6">
                                                     <div className="relative h-24 w-24 flex-shrink-0">
                                                         <img
@@ -200,19 +200,19 @@ const CartPage = () => {
                                                     <div className="flex-1 space-y-2">
                                                         <div className="flex items-start justify-between">
                                                             <div>
-                                                                <h3 className="font-medium text-gray-900">{title}</h3>
-                                                                <p className="text-sm text-gray-500 capitalize">{category}</p>
+                                                                <h3 className="font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">{title}</h3>
+                                                                <p className="text-sm text-gray-500 dark:text-gray-400 capitalize transition-colors duration-300">{category}</p>
                                                                 {offer?.isActive && (
                                                                     <div className="flex items-center mt-1">
                                                                         <p className="text-sm text-red-500 font-medium">
                                                                             {parseFloat(offer.discountPercentage || 0).toFixed(0)}% OFF
                                                                         </p>
-                                                                        <p className="text-sm text-gray-500 line-through ml-2">
+                                                                        <p className="text-sm text-gray-500 dark:text-gray-400 line-through ml-2 transition-colors duration-300">
                                                                             ৳{basePrice.toFixed(2)}
                                                                         </p>
                                                                     </div>
                                                                 )}
-                                                                <p className="text-sm text-gray-500 mt-1">
+                                                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 transition-colors duration-300">
                                                                     Shipping: ৳{safeShipping.toFixed(2)}
                                                                 </p>
                                                             </div>
@@ -228,21 +228,21 @@ const CartPage = () => {
                                                             <div className="flex items-center space-x-2">
                                                                 <button
                                                                     onClick={() => handleDecrement(id)}
-                                                                    className="rounded-full p-1 text-gray-600 hover:bg-gray-100"
+                                                                    className="rounded-full p-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300"
                                                                 >
                                                                     <Minus size={16} />
                                                                 </button>
-                                                                <span className="w-8 text-center font-medium">
+                                                                <span className="w-8 text-center font-medium dark:text-gray-200 transition-colors duration-300">
                                                                     {safeQuantity}
                                                                 </span>
                                                                 <button
                                                                     onClick={() => handleIncrement(id)}
-                                                                    className="rounded-full p-1 text-gray-600 hover:bg-gray-100"
+                                                                    className="rounded-full p-1 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300"
                                                                 >
                                                                     <Plus size={16} />
                                                                 </button>
                                                             </div>
-                                                            <div className="font-medium text-gray-900">
+                                                            <div className="font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">
                                                                 ৳{itemTotal.toFixed(2)}
                                                             </div>
                                                         </div>
@@ -253,10 +253,10 @@ const CartPage = () => {
                                     })}
                                 </div>
                             ) : (
-                                <div className="bg-white rounded-lg shadow-sm p-12 text-center">
-                                    <ShoppingBag className="mx-auto h-12 w-12 text-gray-400" />
-                                    <h3 className="mt-4 text-lg font-medium text-gray-900">Your cart is empty</h3>
-                                    <p className="mt-2 text-sm text-gray-500">
+                                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-12 text-center transition-colors duration-300">
+                                    <ShoppingBag className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 transition-colors duration-300" />
+                                    <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">Your cart is empty</h3>
+                                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
                                         Looks like you haven't added anything to your cart yet.
                                     </p>
                                 </div>
@@ -265,24 +265,24 @@ const CartPage = () => {
 
                         {cartItems.length > 0 && (
                             <div className="mt-8 lg:col-span-4 lg:mt-0">
-                                <div className="bg-white rounded-lg shadow-sm">
+                                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm transition-colors duration-300">
                                     <div className="p-6">
-                                        <h2 className="text-lg font-medium text-gray-900 mb-4">Order Summary</h2>
+                                        <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 transition-colors duration-300">Order Summary</h2>
                                         <div className="space-y-4">
                                             <div className="flex justify-between text-sm">
-                                                <p className="text-gray-600">
+                                                <p className="text-gray-600 dark:text-gray-400 transition-colors duration-300">
                                                     Subtotal ({cartItemTotal || 0} {(cartItemTotal || 0) === 1 ? 'item' : 'items'})
                                                 </p>
-                                                <p className="font-medium text-gray-900">৳{cartSubtotal.toFixed(2)}</p>
+                                                <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">৳{cartSubtotal.toFixed(2)}</p>
                                             </div>
                                             <div className="flex justify-between text-sm">
-                                                <p className="text-gray-600">Shipping</p>
-                                                <p className="font-medium text-gray-900">৳{totalShipping.toFixed(2)}</p>
+                                                <p className="text-gray-600 dark:text-gray-400 transition-colors duration-300">Shipping</p>
+                                                <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">৳{totalShipping.toFixed(2)}</p>
                                             </div>
-                                            <div className="border-t border-gray-200 pt-4">
+                                            <div className="border-t border-gray-200 dark:border-gray-700 pt-4 transition-colors duration-300">
                                                 <div className="flex justify-between">
-                                                    <p className="text-base font-medium text-gray-900">Order Total</p>
-                                                    <p className="text-base font-medium text-gray-900">৳{cartTotal.toFixed(2)}</p>
+                                                    <p className="text-base font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">Order Total</p>
+                                                    <p className="text-base font-medium text-gray-900 dark:text-gray-100 transition-colors duration-300">৳{cartTotal.toFixed(2)}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -297,7 +297,7 @@ const CartPage = () => {
                                             <div className="mt-4">
                                                 <button
                                                     onClick={handlePayment}
-                                                    className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                                                    className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 transition-colors duration-300"
                                                 >
                                                     Pay Now (SSLCommerz)
                                                 </button>
@@ -310,15 +310,15 @@ const CartPage = () => {
                     </div>
 
                     {/* Refund Policy Section */}
-                    <div className="mt-12 bg-white rounded-xl shadow-sm p-8">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">Refund and Return Policy</h2>
+                    <div className="mt-12 bg-white dark:bg-gray-800 rounded-xl shadow-sm p-8 transition-colors duration-300">
+                        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 transition-colors duration-300">Refund and Return Policy</h2>
                         <div className="prose max-w-none">
-                            <p className="text-gray-600 mb-4">
+                            <p className="text-gray-600 dark:text-gray-400 mb-4 transition-colors duration-300">
                                 We maintain a 'closed box delivery' policy to ensure product authenticity, customer privacy, and prevent product adulteration.
                             </p>
 
-                            <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-4">Return Conditions:</h3>
-                            <ul className="list-disc pl-6 space-y-3 text-gray-600">
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-4 transition-colors duration-300">Return Conditions:</h3>
+                            <ul className="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-400 transition-colors duration-300">
                                 <li>
                                     For damaged, defective, or wrong products, contact our Customer Service team immediately with photo/video evidence.
                                 </li>
@@ -336,8 +336,8 @@ const CartPage = () => {
                                 </li>
                             </ul>
 
-                            <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-4">Return Process:</h3>
-                            <ul className="list-disc pl-6 space-y-3 text-gray-600">
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-4 transition-colors duration-300">Return Process:</h3>
+                            <ul className="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-400 transition-colors duration-300">
                                 <li>
                                     Contact our Customer Service team through email or phone.
                                 </li>
@@ -351,8 +351,8 @@ const CartPage = () => {
                                     Pickup may take up to 7 working days, and replacement delivery up to 7 additional working days.
                                 </li>
                             </ul>
-                            <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-4">How to send your product back to us? How much will it cost you?</h3>
-                            <ul className="list-disc pl-6 space-y-3 text-gray-600">
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-4 transition-colors duration-300">How to send your product back to us? How much will it cost you?</h3>
+                            <ul className="list-disc pl-6 space-y-3 text-gray-600 dark:text-gray-400 transition-colors duration-300">
                                 <li>
                                 Both in Dhaka and outside Dhaka, the product will be arranged for pickup through a third-party courier by our Customer Relationship Management department. You will not have to bear any cost in this case (Conditions applied)
                                 </li>
@@ -364,12 +364,12 @@ const CartPage = () => {
                             <div className="mt-6 bg-green-50 p-4 rounded-lg">
                                 <h4 className="text-green-800 font-medium mb-2">Contact Support</h4>
                                 <p className="text-green-700">
-                                    Email: support@elanzo.com<br />
-                                    Phone: +880 623-456-7890
+                                    Email: support@organicahub.com<br />
+                                    Phone: +880 123-456-7890
                                 </p>
                             </div>
 
-                            <p className="mt-6 text-sm text-gray-500">
+                            <p className="mt-6 text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">
                                 Customer satisfaction is our top priority. If you receive a defective or incorrect product, 
                                 we ensure replacement or full refund after receiving the returned item. No additional shipping 
                                 charges for replacement of defective products.

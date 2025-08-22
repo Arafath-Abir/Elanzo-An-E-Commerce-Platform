@@ -9,7 +9,9 @@ import Loader from "../../components/loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteFromCart } from "../../redux/cartSlice";
 import toast from "react-hot-toast";
-import { FaShoppingCart, FaMinus, FaPlus } from "react-icons/fa";
+import { FaShoppingCart, FaMinus, FaPlus, FaWarehouse, FaExclamationCircle, FaCheckCircle } from "react-icons/fa";
+import AIRecommendations from "../../components/aiRecommendations/AIRecommendations";
+import AISentimentAnalysis from "../../components/aiSentimentAnalysis/AISentimentAnalysis";
 
 const ProductInfo = () => {
     const context = useContext(myContext);
@@ -86,7 +88,11 @@ const ProductInfo = () => {
 
     useEffect(() => {
         getProductData();
-    }, [])
+        // Reset states when navigating between products
+        setReview('');
+        setRating(5);
+        setShowReviewForm(false);
+    }, [id]) // Add id to the dependency array to reload data when URL changes
 
     const renderStars = (count) => {
         return [...Array(5)].map((_, index) => (
@@ -184,6 +190,25 @@ const ProductInfo = () => {
                                 <p className="text-gray-600 mb-6 leading-relaxed">
                                     {product.description}
                                 </p>
+                                
+                                {/* Stock Status */}
+                                <div className="mb-6">
+                                    {product.quantity > 0 ? (
+                                        <div className="flex items-center">
+                                            <FaCheckCircle className="text-green-600 mr-2" />
+                                            <span className="font-medium">
+                                                {product.quantity > 10 
+                                                    ? 'In Stock' 
+                                                    : `Only ${product.quantity} left in stock - order soon!`}
+                                            </span>
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center">
+                                            <FaExclamationCircle className="text-red-500 mr-2" />
+                                            <span className="font-medium text-red-500">Out of Stock</span>
+                                        </div>
+                                    )}
+                                </div>
 
                                 <div className="flex items-center space-x-4">
                                     {cartItems.some((p) => p.id === product.id) ? (
@@ -197,10 +222,11 @@ const ProductInfo = () => {
                                     ) : (
                                         <button
                                             onClick={() => addCart(product)}
-                                            className="bg-green-500 text-white px-8 py-3 rounded-lg hover:bg-green-600 transition-colors flex items-center space-x-2"
+                                            disabled={product.quantity <= 0}
+                                            className={`${product.quantity > 0 ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-400 cursor-not-allowed'} text-white px-8 py-3 rounded-lg transition-colors flex items-center space-x-2`}
                                         >
                                             <FaShoppingCart />
-                                            <span>Add to Cart</span>
+                                            <span>{product.quantity > 0 ? 'Add to Cart' : 'Out of Stock'}</span>
                                         </button>
                                     )}
                                 </div>
@@ -208,10 +234,23 @@ const ProductInfo = () => {
                         </div>
                     </div>
 
+                    {/* AI Recommendations Section */}
+                    <AIRecommendations 
+                        currentProduct={product}
+                        userHistory={[]} // You can implement user history tracking
+                    />
+
+                    {/* AI Sentiment Analysis Section */}
+                    {product?.reviews?.length > 0 && (
+                        <div className="mb-8">
+                            <AISentimentAnalysis reviews={product.reviews} />
+                        </div>
+                    )}
+
                     {/* Reviews Section */}
-                    <div className="bg-white rounded-lg shadow-lg p-8">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 transition-colors duration-300">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-2xl font-bold text-gray-700">Customer Reviews</h2>
+                            <h2 className="text-2xl font-bold text-gray-700 dark:text-gray-200">Customer Reviews</h2>
                             {user && (
                                 <button
                                     onClick={() => setShowReviewForm(!showReviewForm)}

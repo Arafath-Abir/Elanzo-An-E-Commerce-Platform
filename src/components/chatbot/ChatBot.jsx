@@ -9,7 +9,7 @@ const ChatBot = () => {
     const [inputMessage, setInputMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef(null);
-    const API_KEY = 'AIzaSyA5eMFxn0IVUxd7l6WV76e7AkYf3mmTRBo';
+    const API_KEY = 'AIzaSyAxsK_qradSp0pG9-KxV-_xXb4swhEeMhQ';
     const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
     // Project-specific knowledge base

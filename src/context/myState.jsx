@@ -9,6 +9,17 @@ function MyState({ children }) {
     // Loading State 
     const [loading, setLoading] = useState(false);
 
+    // Dark Mode State
+    const [darkMode, setDarkMode] = useState(() => {
+        // Check localStorage and system preference
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode !== null) {
+            return savedMode === 'true';
+        }
+        // If no saved preference, check system preference
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    });
+
     // User State
     const [getAllProduct, setGetAllProduct] = useState([]);
 
@@ -134,6 +145,24 @@ function MyState({ children }) {
         }
     }
 
+    // Toggle dark mode function
+    const toggleDarkMode = () => {
+        setDarkMode(prevMode => {
+            const newMode = !prevMode;
+            localStorage.setItem('darkMode', newMode);
+            return newMode;
+        });
+    };
+
+    // Apply dark mode class to html element
+    useEffect(() => {
+        if (darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [darkMode]);
+
     useEffect(() => {
         getAllProductFunction();
         getAllOrderFunction();
@@ -148,7 +177,9 @@ function MyState({ children }) {
             getAllOrder,
             deleteProduct,
             getAllUser,
-            updateOrderStatus
+            updateOrderStatus,
+            darkMode,
+            toggleDarkMode
         }}>
             {children}
         </MyContext.Provider>

@@ -12,7 +12,7 @@ const AdminDashboard = () => {
     const { getAllProduct, getAllOrder, getAllUser } = context;
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
             {/* Navbar */}
             <Navbar />
 
@@ -20,17 +20,17 @@ const AdminDashboard = () => {
             <div className="container mx-auto px-4 py-8">
                 {/* Top */}
                 <div className="mb-8">
-                    <div className="bg-gradient-to-r from-green-400/10 to-green-500/10 p-6 rounded-xl border border-green-500/10 shadow-sm">
-                        <h1 className="text-center text-2xl font-bold text-green-800">Admin/Seller Dashboard</h1>
+                    <div className="bg-gradient-to-r from-green-400/10 to-green-500/10 dark:from-green-400/5 dark:to-green-500/5 p-6 rounded-xl border border-green-500/10 shadow-sm transition-colors duration-300">
+                        <h1 className="text-center text-2xl font-bold text-green-800 dark:text-green-400 transition-colors duration-300">Admin/Seller Dashboard</h1>
                     </div>
                 </div>
 
                 {/* Admin Profile Card */}
                 <div className="mb-8">
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden transition-colors duration-300">
                         <div className="relative h-32 bg-gradient-to-r from-green-400 to-green-500">
                             <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
-                                <div className="w-24 h-24 rounded-full border-4 border-white bg-white shadow-md overflow-hidden">
+                                <div className="w-24 h-24 rounded-full border-4 border-white dark:border-gray-700 bg-white dark:bg-gray-700 shadow-md overflow-hidden transition-colors duration-300">
                                     <img 
                                         src="https://cdn-icons-png.flaticon.com/128/2202/2202112.png" 
                                         alt="Admin" 
@@ -41,10 +41,10 @@ const AdminDashboard = () => {
                         </div>
                         <div className="pt-16 pb-6 px-4">
                             <div className="text-center space-y-1">
-                                <h2 className="text-xl font-semibold text-gray-800">{user?.name || 'Admin User'}</h2>
-                                <p className="text-green-600 font-medium">{user?.role || 'Administrator'}</p>
-                                <p className="text-gray-500 text-sm">{user?.email}</p>
-                                <p className="text-gray-400 text-sm">Joined: {user?.date}</p>
+                                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100 transition-colors duration-300">{user?.name || 'Admin User'}</h2>
+                                <p className="text-green-600 dark:text-green-400 font-medium transition-colors duration-300">{user?.role || 'Administrator'}</p>
+                                <p className="text-gray-500 dark:text-gray-400 text-sm transition-colors duration-300">{user?.email}</p>
+                                <p className="text-gray-400 dark:text-gray-500 text-sm transition-colors duration-300">Joined: {user?.date}</p>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@ const AdminDashboard = () => {
                         <TabList className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                             {/* Total Products */}
                             <Tab className="outline-none">
-                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-green-500/50 hover:shadow-md transition-all cursor-pointer">
+                                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-green-500/50 hover:shadow-md transition-all cursor-pointer">
                                     <div className="flex items-center space-x-4">
                                         <div className="p-3 bg-green-500/10 rounded-lg">
                                             <svg
@@ -79,8 +79,8 @@ const AdminDashboard = () => {
                                             </svg>
                                         </div>
                                         <div>
-                                            <p className="text-gray-500 font-medium">Total Products</p>
-                                            <h3 className="text-2xl font-bold text-gray-800">{getAllProduct.length}</h3>
+                                            <p className="text-gray-500 dark:text-gray-400 font-medium transition-colors duration-300">Total Products</p>
+                                            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 transition-colors duration-300">{getAllProduct.length}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@ const AdminDashboard = () => {
 
                             {/* Total Orders */}
                             <Tab className="outline-none">
-                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-green-500/50 hover:shadow-md transition-all cursor-pointer">
+                                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-green-500/50 hover:shadow-md transition-all cursor-pointer">
                                     <div className="flex items-center space-x-4">
                                         <div className="p-3 bg-green-500/10 rounded-lg">
                                             <svg
@@ -110,8 +110,8 @@ const AdminDashboard = () => {
                                             </svg>
                                         </div>
                                         <div>
-                                            <p className="text-gray-500 font-medium">Total Orders</p>
-                                            <h3 className="text-2xl font-bold text-gray-800">{getAllOrder.length}</h3>
+                                            <p className="text-gray-500 dark:text-gray-400 font-medium transition-colors duration-300">Total Orders</p>
+                                            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 transition-colors duration-300">{getAllOrder.length}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
 
                             {/* Total Users */}
                             <Tab className="outline-none">
-                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:border-green-500/50 hover:shadow-md transition-all cursor-pointer">
+                                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:border-green-500/50 hover:shadow-md transition-all cursor-pointer">
                                     <div className="flex items-center space-x-4">
                                         <div className="p-3 bg-green-500/10 rounded-lg">
                                             <svg
@@ -139,8 +139,8 @@ const AdminDashboard = () => {
                                             </svg>
                                         </div>
                                         <div>
-                                            <p className="text-gray-500 font-medium">Total Users</p>
-                                            <h3 className="text-2xl font-bold text-gray-800">{getAllUser.length}</h3>
+                                            <p className="text-gray-500 dark:text-gray-400 font-medium transition-colors duration-300">Total Users</p>
+                                            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 transition-colors duration-300">{getAllUser.length}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@ const AdminDashboard = () => {
                         </TabList>
 
                         {/* Tab Panels */}
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden transition-colors duration-300">
                             <TabPanel>
                                 <ProductDetail />
                             </TabPanel>

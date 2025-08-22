@@ -3,7 +3,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 
 const HeroSection = () => {
     return (
-        <div className="mt-4">
+        <div className="pt-3">
             <div className="container mx-auto px-4">
                 <div className="relative w-full h-[250px] sm:h-[350px] md:h-[450px] lg:h-[550px] rounded-2xl overflow-hidden shadow-xl">
                     <Carousel

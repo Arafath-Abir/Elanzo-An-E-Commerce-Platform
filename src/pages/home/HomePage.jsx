@@ -41,9 +41,9 @@ const HomePage = () => {
                         {/* Close Button */}
                         <button
                             onClick={() => setShowPopup(false)}
-                            className="absolute -top-2 -right-2 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100"
+                            className="absolute -top-2 -right-2 z-10 p-2 bg-white dark:bg-gray-700 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-300"
                         >
-                            <X size={20} className="text-gray-600" />
+                            <X size={20} className="text-gray-600 dark:text-gray-300" />
                         </button>
 
                         {/* Popup Image */}

@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { fireDB } from "../../firebase/FirebaseConfig";
 import { useNavigate } from "react-router";
 import Loader from "../../components/loader/Loader";
-import { FaImage, FaBox, FaDollarSign, FaTags, FaFileAlt } from 'react-icons/fa';
+import { FaImage, FaBox, FaDollarSign, FaTags, FaFileAlt, FaWarehouse } from 'react-icons/fa';
 
 const categoryList = [
     { name: "Men's Fashion" },
@@ -96,19 +96,19 @@ const AddProductPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50/50">
+        <div className="min-h-screen bg-gray-50/50 dark:bg-gray-900 transition-colors duration-300">
             <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 {loading && <Loader />}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden transition-colors duration-300">
                     <div className="px-8 py-6">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+                        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center transition-colors duration-300">
                             Add New Product
                         </h2>
 
                         <div className="space-y-6">
                             {/* Product Title */}
                             <div>
-                                <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                                     <FaBox className="w-4 h-4 mr-2 text-gray-400" />
                                     Product Title
                                 </label>
@@ -117,15 +117,15 @@ const AddProductPage = () => {
                                     value={product.title}
                                     onChange={(e) => setProduct({ ...product, title: e.target.value })}
                                     placeholder="Enter product title"
-                                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
+                                    className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
                                 />
                             </div>
 
-                            {/* Price and Category */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Price, Stock, and Category */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {/* Price */}
                                 <div>
-                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                                         <FaDollarSign className="mr-2" />
                                         Price
                                     </label>
@@ -134,14 +134,31 @@ const AddProductPage = () => {
                                         name="price"
                                         value={product.price}
                                         onChange={(e) => setProduct({ ...product, price: e.target.value })}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
                                         placeholder="Enter price"
+                                    />
+                                </div>
+                                
+                                {/* Stock Quantity */}
+                                <div>
+                                    <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
+                                        <FaWarehouse className="mr-2" />
+                                        Stock Quantity
+                                    </label>
+                                    <input
+                                        type="number"
+                                        name="quantity"
+                                        min="0"
+                                        value={product.quantity}
+                                        onChange={(e) => setProduct({ ...product, quantity: parseInt(e.target.value) || 0 })}
+                                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
+                                        placeholder="Available stock"
                                     />
                                 </div>
 
                                 {/* Shipping Cost */}
                                 <div>
-                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                                         <FaDollarSign className="mr-2" />
                                         Shipping Cost
                                     </label>
@@ -150,21 +167,21 @@ const AddProductPage = () => {
                                         name="shippingCost"
                                         value={product.shippingCost}
                                         onChange={(e) => setProduct({ ...product, shippingCost: e.target.value })}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors duration-300"
                                         placeholder="Enter shipping cost"
                                     />
                                 </div>
 
                                 {/* Category */}
                                 <div>
-                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                                         <FaTags className="w-4 h-4 mr-2 text-gray-400" />
                                         Category
                                     </label>
                                     <select
                                         value={product.category}
                                         onChange={(e) => setProduct({ ...product, category: e.target.value })}
-                                        className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
+                                        className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
                                     >
                                         <option value="">Select a category</option>
                                         {categoryList.map(({ name }, index) => (
@@ -178,7 +195,7 @@ const AddProductPage = () => {
 
                             {/* Image URL */}
                             <div>
-                                <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                                     <FaImage className="w-4 h-4 mr-2 text-gray-400" />
                                     Image URL
                                 </label>
@@ -187,7 +204,7 @@ const AddProductPage = () => {
                                     value={product.productImageUrl}
                                     onChange={(e) => setProduct({ ...product, productImageUrl: e.target.value })}
                                     placeholder="Enter image URL"
-                                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
+                                    className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
                                 />
                                 {product.productImageUrl && (
                                     <div className="mt-2">
@@ -206,7 +223,7 @@ const AddProductPage = () => {
 
                             {/* Description */}
                             <div>
-                                <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                                     <FaFileAlt className="w-4 h-4 mr-2 text-gray-400" />
                                     Description
                                 </label>
@@ -215,13 +232,13 @@ const AddProductPage = () => {
                                     onChange={(e) => setProduct({ ...product, description: e.target.value })}
                                     placeholder="Enter product description"
                                     rows="5"
-                                    className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors resize-none"
+                                    className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors resize-none"
                                 />
                             </div>
 
                             {/* Offer */}
                             <div>
-                                <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                                     Offer
                                 </label>
                                 <div className="flex items-center space-x-2">
@@ -231,11 +248,11 @@ const AddProductPage = () => {
                                         onChange={(e) => setProduct({ ...product, offer: { ...product.offer, isActive: e.target.checked } })}
                                         className="w-4 h-4"
                                     />
-                                    <span>Active</span>
+                                    <span className="dark:text-gray-300 transition-colors duration-300">Active</span>
                                 </div>
                                 {product.offer.isActive && (
                                     <div className="mt-2">
-                                        <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
+                                        <label className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors duration-300">
                                             Discount Percentage
                                         </label>
                                         <input
@@ -243,7 +260,7 @@ const AddProductPage = () => {
                                             value={product.offer.discountPercentage}
                                             onChange={(e) => setProduct({ ...product, offer: { ...product.offer, discountPercentage: e.target.value } })}
                                             placeholder="Enter discount percentage"
-                                            className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
+                                            className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-colors"
                                         />
                                     </div>
                                 )}
@@ -254,7 +271,7 @@ const AddProductPage = () => {
                                 <button
                                     onClick={addProductFunction}
                                     disabled={loading}
-                                    className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     {loading ? 'Adding Product...' : 'Add Product'}
                                 </button>

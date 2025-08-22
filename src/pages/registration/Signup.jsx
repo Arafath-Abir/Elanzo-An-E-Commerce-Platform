@@ -136,19 +136,19 @@ const Signup = () => {
     }
 
     return (
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-white">
+        <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
             <Navbar />
 
             <div className="flex-grow flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
                 {loading && <Loader />}
 
-                <div className="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+                <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 border border-gray-100 dark:border-gray-700 transition-colors duration-300">
                     <div>
-                        <h2 className="text-center text-3xl font-extrabold text-gray-900">
+                        <h2 className="text-center text-3xl font-extrabold text-gray-900 dark:text-gray-100 transition-colors duration-300">
                             Create an Account
                         </h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
-                            Join Elanzo and start shopping
+                            Join OrganicaHub and start shopping organic
                         </p>
                     </div>
 
@@ -156,7 +156,7 @@ const Signup = () => {
                         <div className="space-y-5">
                             {/* Name Input */}
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
                                     Full Name
                                 </label>
                                 <div className="mt-1">
@@ -168,7 +168,7 @@ const Signup = () => {
                                         type="text"
                                         autoComplete="name"
                                         required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300"
                                         placeholder="Enter your full name"
                                     />
                                 </div>
@@ -176,7 +176,7 @@ const Signup = () => {
 
                             {/* Email Input */}
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
                                     Email address
                                 </label>
                                 <div className="mt-1">
@@ -188,7 +188,7 @@ const Signup = () => {
                                         type="email"
                                         autoComplete="email"
                                         required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300"
                                         placeholder="Enter your email"
                                     />
                                 </div>
@@ -196,7 +196,7 @@ const Signup = () => {
 
                             {/* Password Input */}
                             <div>
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
                                     Password
                                 </label>
                                 <div className="mt-1">
@@ -208,7 +208,7 @@ const Signup = () => {
                                         type="password"
                                         autoComplete="new-password"
                                         required
-                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                        className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300"
                                         placeholder="Enter your password"
                                     />
                                 </div>
@@ -227,7 +227,7 @@ const Signup = () => {
                             <button
                                 onClick={signupWithGoogle}
                                 type="button"
-                                className="w-full flex justify-center items-center gap-2 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                className="w-full flex justify-center items-center gap-2 py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-300"
                             >
                                 <img src="https://www.google.com/favicon.ico" alt="Google" className="w-4 h-4" />
                                 Sign up with Google

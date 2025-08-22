@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import SearchBar from "../searchBar/SearchBar";
+import AISmartSearch from "../aiSearch/AISmartSearch";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import toast from "react-hot-toast";
+import myContext from "../../context/myContext";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 const Navbar = () => {
     const user = JSON.parse(localStorage.getItem('users'));
@@ -10,6 +12,10 @@ const Navbar = () => {
     const cartItems = useSelector((state) => state.cart);
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    
+    // Get dark mode context
+    const context = useContext(myContext);
+    const { darkMode, toggleDarkMode } = context;
     
     // Close mobile menu when navigating or resizing to desktop
     useEffect(() => {
@@ -153,8 +159,18 @@ const Navbar = () => {
                         <div className="w-full lg:w-auto order-2 lg:order-1 py-4 lg:py-0">
                             {navList}
                         </div>
-                        <div className="w-full lg:w-auto order-1 lg:order-2">
-                            <SearchBar />
+                        <div className="w-full lg:w-auto order-1 lg:order-2 flex items-center space-x-4">
+                            <AISmartSearch />
+                            <button 
+                                onClick={toggleDarkMode}
+                                className="p-2 rounded-full hover:bg-white/10 transition-colors focus:outline-none" 
+                                aria-label="Toggle Dark Mode"
+                            >
+                                {darkMode ? 
+                                    <FaSun className="text-yellow-300" size={18} /> : 
+                                    <FaMoon className="text-gray-100" size={18} />
+                                }
+                            </button>
                         </div>
                     </div>
                 </div>
